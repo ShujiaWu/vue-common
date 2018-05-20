@@ -1,0 +1,87 @@
+/*距离位置*/
+/*内边距*/
+.generate-padding(45);
+.generate-padding(@max, @n:1) when (@n * 5 <= @max) {
+  .padding {
+    @key: @n * 5;
+    &-@{key} { padding: @key * 1px}
+    &-t-@{key} { padding-top: @key * 1px}
+    &-r-@{key} { padding-right: @key * 1px}
+    &-b-@{key} { padding-bottom: @key * 1px}
+    &-l-@{key} { padding-left: @key * 1px}
+  }
+  .generate-padding(@max, @n+1)
+}
+
+/*外边距*/
+.generate-margin(45);
+.generate-margin(@max, @n:1) when (@n * 5 <= @max) {
+  .margin {
+    @key: @n * 5;
+    &-@{key} { margin: @key * 1px}
+    &-t-@{key} { margin-top: @key * 1px}
+    &-r-@{key} { margin-right: @key * 1px}
+    &-b-@{key} { margin-bottom: @key * 1px}
+    &-l-@{key} { margin-left: @key * 1px}
+  }
+  .generate-margin(@max, @n+1)
+}
+
+/* 文字位置 */
+.text {
+  &-left {text-align: left;}
+  &-right {text-align: right;}
+  &-center {text-align: center;}
+}
+
+/* 文字大小 */
+.generate-text-size (@min, @max) when(@min <= @max) {
+  .text-@{min} {font-size: @min * 1px}
+  .generate-text-size(@min+1, @max)
+}
+.generate-text-size(10, 20);
+
+/* 文字颜色 */
+.text {
+  &-primary {color:#3399ff;}
+  &-primary {color:#5cadff;}
+  &-primary {color:#3091f2;}
+  &-info {color:#3399ff;}
+  &-success {color:#00cc66;}
+  &-warning {color:#ff9900;}
+  &-error {color:#ff3300;}
+  &-title {color:#464c5b;}
+  &-content {color:#657180;}
+  &-sub-content {color:#9ea7b4;}
+  &-disabled {color:#c3cbd6;}
+  &-333 {color:#333;}
+  &-666 {color:#666;}
+  &-999 {color:#999;}
+}
+
+
+/* 水平居中 */
+.v-align-middle:after{
+    content:'';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+}
+.v-middle{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* 浮动与清除浮动*/
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+.clear-fix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
