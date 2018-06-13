@@ -99,11 +99,11 @@ export default {
       if ((elOffset.top - this.offsetTop) <= scrollTop && this.offsetType === 'top') {
         if (!affix) {
           this.affix = true
-          this.slotStyle = {
-            width: this.$refs.point.clientWidth + 'px',
-            height: this.$refs.point.clientHeight + 'px'
-          }
           this.slot = true
+        }
+        this.slotStyle = {
+          width: this.$refs.point.clientWidth + 'px',
+          height: this.$refs.point.clientHeight + 'px'
         }
         this.styles = {
           top: `${this.offsetTop}px`,
@@ -115,9 +115,9 @@ export default {
       } else if ((elOffset.top - this.offsetTop) > scrollTop && this.offsetType === 'top') {
         if (affix) {
           this.slot = false
-          this.slotStyle = {}
           this.affix = false
         }
+        this.slotStyle = {}
         this.styles = null
 
         this.$emit('on-change', false)

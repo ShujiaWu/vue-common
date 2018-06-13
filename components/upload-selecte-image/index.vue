@@ -100,9 +100,6 @@ import Table from './table'
 import Service from './service'
 export default {
   mixins: [TableMixins],
-  beforeMount () {
-    this.table.columns = Table(this)
-  },
   props: {
     value: {
       type: Boolean,
@@ -118,6 +115,10 @@ export default {
         return {}
       }
     }
+  },
+  beforeMount () {
+    this.table.columns = Table(this)
+    Object.assign(this.formData, this.params)
   },
   data () {
     return {
