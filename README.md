@@ -4,4 +4,7 @@
 
 ## 依赖说明
 
+请根据使用情况自行安装：
+
 * filter/datatime  `npm install dayjs --save`
+* babel-polyfill `npm install babel-polyfill --save-dev`

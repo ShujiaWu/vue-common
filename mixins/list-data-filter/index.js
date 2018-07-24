@@ -1,4 +1,4 @@
-import ListDataFilter from '@common/components/list-data-filter'
+import ListDataFilter from '@vue-common/components/list-data-filter'
 export default {
   components: {
     ListDataFilter

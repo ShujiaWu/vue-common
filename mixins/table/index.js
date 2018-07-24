@@ -1,16 +1,43 @@
+import ListDataFilter from '@vue-common/components/list-data-filter'
+import PermissionMixin from '@vue-common/mixins/permission'
+// import Service from './service'
+import md5 from 'md5'
 export default {
+  mixins: [PermissionMixin],
+  components: {
+    ListDataFilter
+  },
   created () {
 
   },
   beforeMount () {
-    this.init()
+    this.getList()
   },
   mounted () {
-
+    let hash = `${this.$route.name}-${JSON.stringify(this.$route.params)}-${JSON.stringify(this.$route.query)}`
+    this.pageHash = md5(hash)
+  },
+  activated () {
+    this.reactived()
+    let hash = `${this.$route.name}-${JSON.stringify(this.$route.params)}-${JSON.stringify(this.$route.query)}`
+    this.pageHash = hash = md5(hash)
+    let data = this.$SessionStorage.get(this.pageName)
+    if (data !== this.pageHash) {
+      (this.filter &&
+        this.filter.buttons &&
+        this.filter.buttons.resetSearch &&
+        this.filter.buttons.resetSearch.method &&
+        this.filter.buttons.resetSearch.method()) || this.getList()
+    }
+    this.$SessionStorage.delete(this.pageName)
+  },
+  deactivated () {
+    this.$SessionStorage.set(this.pageName, this.pageHash)
   },
   data () {
     return {
-      filterData: {},
+      pageName: this.$route.name,
+      pageHash: undefined,
       // 用户页面权限
       table: {
         // 表格结构
@@ -25,19 +52,22 @@ export default {
         pageSizeOpts: [10, 20, 30, 40],
         total: 0, // 数据量
         current: 1, // 当前页数
-        size: 10, // 页面数据量
+        size: 20, // 页面数据量
         pages: 1 // 总共页数
-      }
+      },
+      // 查询
+      filter: undefined,
+      filterData: {},
+      apiAppendData: {}
     }
   },
   methods: {
     /**
      * ===========================================================
-     * 初始化
+     * 页面重新激活
      * ===========================================================
      */
-    init () {
-      this.getList()
+    reactived () {
     },
     /**
      * ===========================================================
@@ -47,9 +77,9 @@ export default {
     getList (page) {
       this.table.loading = true
       this.Service.getList({
-        current: page,
+        page: page,
         size: this.page.size
-      }, this.filterData).then(result => {
+      }, this.filterData, this.apiAppendData).then(result => {
         this.table.loading = false
         if (result.isSuccess) {
           this.table.currentRow = null
@@ -65,6 +95,24 @@ export default {
           })
         }
       })
+    },
+    /**
+     * ===========================================================
+     * 搜索
+     * ===========================================================
+     */
+    search (data) {
+      Object.assign(this.filterData, data)
+      this.getList(1, true, '查询成功')
+    },
+    /**
+     * ===========================================================
+     * 重置搜索
+     * ===========================================================
+     */
+    resetSearch () {
+      this.$set(this, 'filterData', {})
+      this.getList(1)
     },
     /**
      * ===========================================================
@@ -86,7 +134,8 @@ export default {
         if (pageSize < this.page.size) {
           // 新的页面容量 < 旧的页面容量
           this.page.size = pageSize
-          this.table.data.splice(pageSize, Math.min(this.page.size, this.page.total) - 1)
+          this.table.data.splice(0, this.table.data.length, ...this.table.data.splice(
+            0, Math.min(this.page.size, this.page.total)))
           // this.getList(this.page.current)
           return
         }

@@ -20,7 +20,7 @@ export default (vm) => {
       ellipsis: true,
       align: 'center',
       render: (h, params) => {
-        return h('span', datetime(params.row.datetime, 'yyyy-MM-dd HH:mm:ss'))
+        return h('span', datetime(params.row.datetime, 'yyy-MM-dd HH:mm:ss'))
       }
     }
   ]

@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import Constant from '@common/filters/constant'
+import Constant from '../../filters/constant'
 import Types from './types'
 export default {
   name: 'ListDataFilter',
