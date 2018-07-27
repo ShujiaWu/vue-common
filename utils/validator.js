@@ -5,7 +5,8 @@ export const RegExpChineseName = /^([\u4e00-\u9fa5]){2,8}$/
 export const RegExpPositiveNumber = /^[0-9]+$/
 export const RegExpEmail = /^([a-zA-Z0-9_\-.])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
 export const RegExpIdent = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/i
-export const RegExpPwd = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,30}/
+export const RegExpPwd = /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/
+export const RegExpBankCard = /^[0-9]{16,19}$/
 /**
  * 银行卡验证
  */
