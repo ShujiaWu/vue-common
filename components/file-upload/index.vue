@@ -37,7 +37,7 @@
       :max-size="15000"
       :default-file-list="defaultList"
       :hidden="disabled || !(maxCount < 0 || (maxCount > 0 && maxCount > uploadList.length))">
-      <Button type="ghost" icon="ios-cloud-upload-outline">{{buttonName}}</Button>
+      <Button type="default" icon="ios-cloud-upload-outline">{{buttonName}}</Button>
     </Upload>
     <div>
       <Modal title="查看文件" v-model="dialog.show" :transfer="false">

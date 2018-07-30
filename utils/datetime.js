@@ -49,7 +49,7 @@ export function format (value, formater) {
   }
 }
 
-export function add(value, step, unit) {
+export function add (value, step, unit) {
   let date = new Date(value).getTime()
   switch (unit) {
     case Unit.millisecond: {
@@ -83,7 +83,7 @@ export function add(value, step, unit) {
   }
   return new Date(date)
 }
-export function subtract(value, step, unit) {
+export function subtract (value, step, unit) {
   let date = new Date(value).getTime()
   switch (unit) {
     case Unit.millisecond: {
