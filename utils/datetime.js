@@ -142,6 +142,9 @@ let fn = (value) => {
     toDate () {
       console.log(this.value)
       return this.value
+    },
+    getTime () {
+      return this.value.getTime()
     }
   }
 }
