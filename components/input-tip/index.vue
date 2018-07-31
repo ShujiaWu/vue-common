@@ -1,6 +1,8 @@
 <template>
   <Tooltip>
-    <Icon type="ios-information" class="icon" :size="size"></Icon>
+    <Icon type="ios-information-circle"
+          class="icon"
+          :size="size"></Icon>
     <div slot="content">
       <slot>{{content}}</slot>
     </div>
@@ -24,8 +26,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .icon {
-    line-height: 33px;
-    color: #999;
-  }
+.icon {
+  line-height: 33px;
+  color: #999;
+}
 </style>
