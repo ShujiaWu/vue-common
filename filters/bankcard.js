@@ -1,4 +1,7 @@
-export default (value) => {
+export default value => {
+  if (!value) {
+    return value
+  }
   let len = value.length
   if (len < 16 || len > 19) {
     return value
