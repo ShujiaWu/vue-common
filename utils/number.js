@@ -3,11 +3,17 @@ export default (value, decimals, isRound = true) => {
     // console.error('【数字格式化】传入非数字')
     return value
   }
+  let isDecimal = parseFloat(value) < 0
+  value = Math.abs(value)
   var str
   if (isRound) {
     str = parseFloat(value).toFixed(decimals || 0) + ''
   } else {
-    str = (parseInt(parseFloat(value) * Math.pow(10, decimals || 0)) / Math.pow(10, decimals || 0)).toFixed(decimals || 0) + ''
+    str =
+      (
+        parseInt(parseFloat(value) * Math.pow(10, decimals || 0)) /
+        Math.pow(10, decimals || 0)
+      ).toFixed(decimals || 0) + ''
   }
   var indexOfPoint = str.indexOf('.')
   var integerPart = ''
@@ -34,9 +40,14 @@ export default (value, decimals, isRound = true) => {
     temp.push(firstPart)
   }
   for (var i = 0; i < otherPartLength; i++) {
-    temp.push(integerPart.slice(firstPartLength + i * 3, firstPartLength + (i + 1) * 3))
+    temp.push(
+      integerPart.slice(firstPartLength + i * 3, firstPartLength + (i + 1) * 3)
+    )
   }
   integerPart = temp.join(',')
+  if (isDecimal) {
+    integerPart = '-' + integerPart
+  }
   // 返回
   if (!decimals) {
     return integerPart
