@@ -1,20 +1,37 @@
 <template>
-  <nav class="main-menu" :class="{shrink: shrink}">
+  <nav class="main-menu"
+       :class="{shrink: shrink}">
     <!-- 正常模式 -->
     <template v-if="!shrink">
-      <Menu :open-names="openNames" :active-name="activeName" v-if="menus.length" width="230px" :accordion="true" theme="dark">
+      <Menu :open-names="openNames"
+            :active-name="activeName"
+            v-if="menus.length"
+            width="230px"
+            :accordion="true"
+            theme="dark">
         <template v-for="(category, category_index) in menus">
           <!-- 没有子菜单 -->
-          <Menu-item :name="category.target.url" @click.native="menuItemClick(category)" :key="category_index" v-if="!category.menus || (category.menus.length === 0 && category.target && category.target.url)">
-            <Icon :type="category.icon"></Icon><span class="layout-text">{{category.name}}</span>
+          <Menu-item :name="category.target.url"
+                     @click.native="menuItemClick(category)"
+                     :key="category_index"
+                     v-if="!category.menus || (category.menus.length === 0 && category.target && category.target.url)">
+            <Icon :type="category.icon"></Icon>
+            <span class="layout-text">{{category.name}}</span>
           </Menu-item>
           <!-- 有子菜单 -->
-          <Submenu :key="category_index" :name="category.name" v-else>
+          <Submenu :key="category_index"
+                   :name="category.name"
+                   v-else>
             <template slot="title">
-              <Icon :type="category.icon" ></Icon><span class="layout-text">{{category.name}}</span>
+              <Icon :type="category.icon"></Icon>
+              <span class="layout-text">{{category.name}}</span>
             </template>
-            <Menu-item v-for="(item, menu_index) in category.menus" :key="menu_index" :name="item.target.url" @click.native="menuItemClick(item)">
-              <Icon :type="item.icon"></Icon><span class="layout-text">{{item.name}}</span>
+            <Menu-item v-for="(item, menu_index) in category.menus"
+                       :key="menu_index"
+                       :name="item.target.url"
+                       @click.native="menuItemClick(item)">
+              <Icon :type="item.icon"></Icon>
+              <span class="layout-text">{{item.name}}</span>
             </Menu-item>
           </Submenu>
         </template>
@@ -32,15 +49,34 @@
     <template v-else>
       <div style="width:60px;">
         <template v-for="(category, category_index) in menus">
-          <Button style="width: 70px;margin-left: -5px;padding:10px 0;" type="text" @click.native="menuItemClick(category)" :key="category_index" v-if="!category.menus || (category.menus.length === 0 && category.menus.target && category.menus.target.url)">
-            <Icon :size="20" color="#FFF" :type="category.icon"></Icon>
+          <Button style="width: 70px;margin-left: -5px;padding:10px 0;"
+                  type="text"
+                  @click.native="menuItemClick(category)"
+                  :key="category_index"
+                  v-if="!category.menus || (category.menus.length === 0 && category.menus.target && category.menus.target.url)">
+            <Icon :size="20"
+                  color="#FFF"
+                  :type="category.icon"></Icon>
           </Button>
-          <Dropdown transfer placement="right-start" :key="category_index" style="display:inline-block;" v-else>
-            <Button style="width: 70px;margin-left: -5px;padding:10px 0;" type="text">
-              <Icon :size="20" color="#FFF" :type="category.icon"></Icon>
+          <Dropdown transfer
+                    placement="right-start"
+                    :key="category_index"
+                    style="display:inline-block;"
+                    v-else>
+            <Button style="width: 70px;margin-left: -5px;padding:10px 0;"
+                    type="text">
+              <Icon :size="20"
+                    color="#FFF"
+                    :type="category.icon"></Icon>
             </Button>
-            <DropdownMenu style="width: 200px;" slot="list">
-              <DropdownItem v-for="(item, menu_index) in category.menus" :key="menu_index" @click.native="menuItemClick(item)"><Icon :type="item.icon"></Icon><span style="padding-left:10px;">{{ item.name }}</span></DropdownItem>
+            <DropdownMenu style="width: 200px;"
+                          slot="list">
+              <DropdownItem v-for="(item, menu_index) in category.menus"
+                            :key="menu_index"
+                            @click.native="menuItemClick(item)">
+                <Icon :type="item.icon"></Icon>
+                <span style="padding-left:10px;">{{ item.name }}</span>
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </template>
@@ -158,22 +194,23 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .main-menu {
-    display: inline-block;
-    width: 250px;
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  .main-menu.shrink {
-    width: 80px;
-    height: 100%;
-    overflow-y: auto;
+.main-menu {
+  display: inline-block;
+  width: 250px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.main-menu.shrink {
+  width: 80px;
+  height: 100%;
+  overflow-y: auto;
 
-    .layout-text {
-      display: inline-block;
-      white-space: nowrap;
-      position: absolute;
-    }
+  .layout-text {
+    display: inline-block;
+    white-space: nowrap;
+    position: absolute;
+    vertical-align: middle;
   }
+}
 </style>
