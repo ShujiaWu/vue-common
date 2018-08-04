@@ -59,7 +59,6 @@ export default {
       type: Object,
       default () {
         return {
-          version: 'v1',
           channel: 'h5',
           fileSubject: 'Tester',
           fileOwner: -1
