@@ -11,6 +11,9 @@ export function isValid (value) {
   if (value === undefined || value === '' || value === null) {
     return false
   }
+  if (typeof value === 'string') {
+    value = value.replace(/-/g, '/')
+  }
   if (new Date(value).toString() === 'Invalid Date') {
     return false
   }
@@ -18,6 +21,9 @@ export function isValid (value) {
 }
 
 export function format (value, formater) {
+  if (typeof value === 'string') {
+    value = value.replace(/-/g, '/')
+  }
   if (isValid(value)) {
     let dateTime = new Date(value)
     let fullYear = dateTime.getFullYear()
@@ -50,6 +56,9 @@ export function format (value, formater) {
 }
 
 export function add (value, step, unit) {
+  if (typeof value === 'string') {
+    value = value.replace(/-/g, '/')
+  }
   let date = new Date(value).getTime()
   switch (unit) {
     case Unit.millisecond: {
@@ -84,6 +93,9 @@ export function add (value, step, unit) {
   return new Date(date)
 }
 export function subtract (value, step, unit) {
+  if (typeof value === 'string') {
+    value = value.replace(/-/g, '/')
+  }
   let date = new Date(value).getTime()
   switch (unit) {
     case Unit.millisecond: {
@@ -119,6 +131,9 @@ export function subtract (value, step, unit) {
 }
 
 let fn = (value) => {
+  if (typeof value === 'string') {
+    value = value.replace(/-/g, '/')
+  }
   return {
     value: isValid(value) ? new Date(value) : new Date(),
     isValid () {
