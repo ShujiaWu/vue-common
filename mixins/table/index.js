@@ -218,6 +218,8 @@ export default {
         case 'edit':
           this.getList(this.page.current)
           break
+        default:
+          this.getList(1)
       }
     }
   }
