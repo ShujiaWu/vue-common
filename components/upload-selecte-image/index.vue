@@ -164,7 +164,7 @@ export default {
      * ===========================================================
      */
     onSuccess (response, file, fileList) {
-      console.log(response)
+      // console.log(response)
       this.upload.uploading = false
       this.upload.url = response.result[0]
       this.upload.message = `上传成功，图片地址：${response.result[0]}`
@@ -176,7 +176,7 @@ export default {
      */
     onError (error, file, fileList) {
       this.upload.uploading = false
-      console.log(error)
+      // console.log(error)
       this.upload.message = `文件上传失败：${error.message}`
     },
     changeSelect () {
