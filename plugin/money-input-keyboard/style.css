@@ -1,0 +1,36 @@
+.keyboard {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #333;
+  background: #FFF;
+}
+
+.keyboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.keyboard td {
+  width: 25%;
+  text-align: center;
+  border: 1px solid #EFEFEF;
+  padding: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.keyboard td.pay {
+  background: rgb(214, 214, 214);
+}
+
+.keyboard td.pay:not(.disabled) {
+  background: rgb(243, 122, 52);
+  color: #FFF;
+}
+
+.keyboard td:not(.disabled).active,
+.keyboard td:not(.disabled):active {
+  background: rgb(209, 208, 208);
+}

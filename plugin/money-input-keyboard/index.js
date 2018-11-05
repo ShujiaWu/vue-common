@@ -72,8 +72,7 @@ export default (showValue, pay) => {
     }
   })
 
-  // 抬起
-  $Keyboard.addEventListener('touchend', function (event) {
+  function click (event) {
     event.target.classList.remove('active')
     let key = event.target.getAttribute('data-num')
     switch (key) {
@@ -90,8 +89,7 @@ export default (showValue, pay) => {
         break
       case '0':
         // 0 做特殊处理
-        if (input.length === 1 && input[0] === '0') {
-        } else {
+        if (input.length === 1 && input[0] === '0') {} else {
           input.push(key)
         }
         break
@@ -126,5 +124,9 @@ export default (showValue, pay) => {
     showInput()
     // 取消事件冒泡，防止出现点击300ms延时
     event.preventDefault()
-  })
+  }
+
+  // 抬起
+  $Keyboard.addEventListener('touchend', click)
+  $Keyboard.addEventListener('click', click)
 }
