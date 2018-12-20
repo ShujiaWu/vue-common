@@ -14,14 +14,14 @@
           <Menu-item :name="category.target.url"
                      @click.native="menuItemClick(category)"
                      :key="category_index"
-                     v-if="!category.menus || (category.menus.length === 0 && category.target && category.target.url)">
+                     v-if="(!category.menus || (category.menus.length === 0 && category.target && category.target.url)) && isShow(category)">
             <Icon :type="category.icon"></Icon>
             <span class="layout-text">{{category.name}}</span>
           </Menu-item>
           <!-- 有子菜单 -->
           <Submenu :key="category_index"
                    :name="category.name"
-                   v-else>
+                   v-if="!(!category.menus || (category.menus.length === 0 && category.target && category.target.url)) && isShowCategory(category)">
             <template slot="title">
               <Icon :type="category.icon"></Icon>
               <span class="layout-text">{{category.name}}</span>
@@ -29,6 +29,7 @@
             <Menu-item v-for="(item, menu_index) in category.menus"
                        :key="menu_index"
                        :name="item.target.url"
+                       v-if="isShow(item)"
                        @click.native="menuItemClick(item)">
               <Icon :type="item.icon"></Icon>
               <span class="layout-text">{{item.name}}</span>
@@ -53,7 +54,7 @@
                   type="text"
                   @click.native="menuItemClick(category)"
                   :key="category_index"
-                  v-if="!category.menus || (category.menus.length === 0 && category.menus.target && category.menus.target.url)">
+                  v-if="(!category.menus || (category.menus.length === 0 && category.target && category.target.url)) && isShow(category)">
             <Icon :size="20"
                   color="#FFF"
                   :type="category.icon"></Icon>
@@ -62,7 +63,7 @@
                     placement="right-start"
                     :key="category_index"
                     style="display:inline-block;"
-                    v-else>
+                    v-if="!(!category.menus || (category.menus.length === 0 && category.target && category.target.url)) && isShowCategory(category)">
             <Button style="width: 70px;margin-left: -5px;padding:10px 0;"
                     type="text">
               <Icon :size="20"
@@ -73,6 +74,7 @@
                           slot="list">
               <DropdownItem v-for="(item, menu_index) in category.menus"
                             :key="menu_index"
+                            v-if="isShow(item)"
                             @click.native="menuItemClick(item)">
                 <Icon :type="item.icon"></Icon>
                 <span style="padding-left:10px;">{{ item.name }}</span>
@@ -110,6 +112,12 @@ export default {
       type: Object,
       required: true,
       default: () => {}
+    },
+    isShow: {
+      type: Function,
+      default: (data) => {
+        return true
+      }
     }
   },
   beforeMount () {
@@ -162,6 +170,15 @@ export default {
     }
   },
   methods: {
+    isShowCategory (category) {
+      if (category.menus && category.menus.length) {
+        return !category.menus.every((value, index, arr) => {
+          return !this.isShow(value)
+        })
+      } else {
+        return false
+      }
+    },
     menuItemClick (item) {
       switch (item.target.type) {
         case 'LINK':
