@@ -213,9 +213,11 @@ export default {
     success (type) {
       switch (type) {
         case 'add':
+        case 'renew':
           this.getList(1)
           break
         case 'edit':
+        case 'reload':
           this.getList(this.page.current)
           break
         default:
