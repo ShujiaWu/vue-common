@@ -1,7 +1,6 @@
 <template>
-  <row :gutter="20">
+  <div class="camera-photo">
     <div v-show="!photo">
-      <h3>摄像头数据：</h3>
       <video class="video" :id="videoEleId"
              style="width: 100%;"></video>
       <canvas :id="canvasEleId"
@@ -9,24 +8,31 @@
       <div class="text-error" v-if="errorMessage">{{errorMessage}}</div>
     </div>
     <div v-show="photo">
-      <h3>获取数据：</h3>
       <div class="photo-perview">
         <div class="no-photo" v-if="!photo"></div>
         <img :src="photo" v-else>
       </div>
     </div>
-    <div class="text-center margin-t-10" v-if="cameraOK && !photo">
+    <div class="text-center margin-t-10" v-if="!disabled && cameraOK && !photo">
       <Button type="primary"
               @click="getPhoto">获取图片</Button>
     </div>
-    <div class="text-center margin-t-10" v-if="cameraOK && photo">
+    <div class="text-center margin-t-10" v-if="!disabled && cameraOK && photo">
       <Button
-              @click="restartCamera">重新获取</Button>
+              @click="reselect">重新获取</Button>
       <Button type="primary"
               class="margin-l-10"
               @click="usePhoto">使用图片</Button>
     </div>
-  </row>
+    <div class="loading" v-if="loading">
+      <Spin fix>
+        <div>
+          <Icon type="ios-loading" class="spin-icon-load" size="18"/>
+        </div>
+        <div class="margin-t-10">{{loadingMsg}}</div>
+      </Spin>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,6 +42,18 @@ export default {
     autoClose: {
       type: Boolean,
       default: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    loadingMsg: {
+      type: String,
+      default: '请稍候...'
     }
   },
   mounted () {
@@ -97,7 +115,7 @@ export default {
         this.canvasEleObject
           .getContext('2d')
           .drawImage(this.videoEleObject, 0, 0)
-        this.photo = this.canvasEleObject.toDataURL('image/webp')
+        this.photo = this.canvasEleObject.toDataURL('image/jpeg')
         if (this.autoClose) {
           this.stopCamera()
         }
@@ -134,7 +152,7 @@ export default {
         .catch(err => {
           this.cameraOK = false
           this.errorMessage = err.message
-          console.error(err.name + ': ' + err.message)
+          // console.error(err.name + ': ' + err.message)
         })
     },
     restartCamera () {
@@ -145,12 +163,31 @@ export default {
     },
     usePhoto () {
       this.$emit('usePhoto', this.photo)
+    },
+    reselect () {
+      this.restartCamera()
+      this.$emit('reselect')
+    },
+    reset () {
+      this.photo = undefined
+      this.stopCamera()
+      this.startCamera()
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+.camera-photo {
+  position: relative;
+  .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
 .video {
   border: 1px solid #dddee1;
   border-radius: 5px;
@@ -178,5 +215,13 @@ export default {
     background-position: center;
     background-size: 30%;
   }
+}
+@keyframes spin {
+  from { transform: rotate(0deg);}
+  50%  { transform: rotate(180deg);}
+  to   { transform: rotate(360deg);}
+}
+.spin-icon-load{
+  animation: spin 1s linear infinite;
 }
 </style>

@@ -58,7 +58,8 @@ export default {
       // 查询
       filter: undefined,
       filterData: {},
-      apiAppendData: {}
+      apiAppendData: {},
+      sortData: {}
     }
   },
   methods: {
@@ -79,7 +80,7 @@ export default {
       this.Service.getList({
         page: page,
         size: this.page.size
-      }, this.filterData, this.apiAppendData).then(result => {
+      }, this.filterData, this.apiAppendData, this.sortData).then(result => {
         this.table.loading = false
         if (result.isSuccess) {
           this.table.currentRow = null
@@ -186,6 +187,11 @@ export default {
           this.table.currentRow = index
         }
       }
+    },
+    sortChange (data) {
+      this.sortData.key = data.column.sortKey || data.key
+      this.sortData.order = data.order
+      this.getList()
     },
     /**
      * ===========================================================
