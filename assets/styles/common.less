@@ -34,6 +34,10 @@
   &-center {text-align: center;}
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
 /* 文字大小 */
 .generate-text-size (@min, @max) when(@min <= @max) {
   .text-@{min} {font-size: @min * 1px}
