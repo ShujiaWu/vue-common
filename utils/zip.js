@@ -1,6 +1,7 @@
 const fs = require('fs')
 const exec = require('child_process').exec
 const path = require('path')
+const os = require('os')
 
 let obj = {
   zip (param) {
@@ -8,7 +9,14 @@ let obj = {
     let srcFileDir = srcFilePathInstant.dir
     let srcFileName = srcFilePathInstant.base
 
-    var cmdStr = `cd ${srcFileDir} ; zip -rP${param.pwd} ${param.zipFilePath} ${srcFileName} -y`
+    let cmdStr = ''
+
+    console.log(os.type())
+    switch (os.type()) {
+      case 'Darwin':
+        cmdStr = `cd ${srcFileDir} ; zip -rP${param.pwd} ${param.zipFilePath} ${srcFileName} -y`
+        break
+    }
 
     console.log('压缩命令:', cmdStr)
 
@@ -42,7 +50,13 @@ let obj = {
     // let targetFileDir = targetFilePathInstant.dir
     // let targetFileName = targetFilePathInstant.base
 
-    var cmdStr = `unzip -o${param.pwd ? 'P' + param.pwd : ''} -d ${param.targetFilePath} ${param.zipFilePath}`
+    let cmdStr = ''
+
+    switch (os.type()) {
+      case 'Darwin':
+        cmdStr = `unzip -o${param.pwd ? 'P' + param.pwd : ''} -d ${param.targetFilePath} ${param.zipFilePath}`
+        break
+    }
 
     console.log('解压命令:', cmdStr)
 
