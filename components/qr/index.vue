@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     createCode () {
+      qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8']
       var qr = qrcode(this.typeNumber, this.errorLevel)
       qr.addData(this.value)
       qr.make()
