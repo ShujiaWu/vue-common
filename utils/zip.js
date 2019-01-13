@@ -3,6 +3,8 @@ const exec = require('child_process').exec
 const path = require('path')
 const os = require('os')
 
+let exePath = path.join(process.cwd(), '3rd/7z1806/7za.exe')
+
 let obj = {
   zip (param) {
     let srcFilePathInstant = path.parse(param.srcFilePath)
@@ -15,6 +17,9 @@ let obj = {
     switch (os.type()) {
       case 'Darwin':
         cmdStr = `cd ${srcFileDir} ; zip -rP${param.pwd} ${param.zipFilePath} ${srcFileName} -y`
+        break
+      case 'Windows_NT':
+        cmdStr = `cd ${srcFileDir} && ${exePath} a -tzip -r -p${param.pwd} ${param.zipFilePath} ${srcFileName}`
         break
     }
 
@@ -37,7 +42,6 @@ let obj = {
           }
           console.log(`stdout: ${stdout}`)
           console.log(`stderr: ${stderr}`)
-          resolve()
         })
         process.on('close', (code) => {
           resolve()
@@ -46,15 +50,18 @@ let obj = {
     })
   },
   unzip (param) {
-    // let targetFilePathInstant = path.parse(param.zipFilePath)
-    // let targetFileDir = targetFilePathInstant.dir
+    let targetFilePathInstant = path.parse(param.zipFilePath)
+    let targetFileDir = targetFilePathInstant.dir
     // let targetFileName = targetFilePathInstant.base
 
     let cmdStr = ''
 
     switch (os.type()) {
       case 'Darwin':
-        cmdStr = `unzip -o${param.pwd ? 'P' + param.pwd : ''} -d ${param.targetFilePath} ${param.zipFilePath}`
+        cmdStr = `unzip -o${param.pwd ? 'P' + param.pwd : ''} -d ${param.targetFilePath} ${param.zipFilePath} -y`
+        break
+      case 'Windows_NT':
+        cmdStr = `${exePath} x -bb1 -r ${param.pwd ? '-p' + param.pwd : ''} ${param.zipFilePath} -o${param.targetFilePath} -y`
         break
     }
 
@@ -96,12 +103,22 @@ let obj = {
           // console.log(`stdout: ${stdout}`)
           // console.log(`stderr: ${stderr}`)
 
-          let reg = new RegExp(/inflating: ([a-zA-Z0-9./\\_-]*)/, 'g')
+          let reg
           let c
           let out = stdout
-          while ((c = reg.exec(out))) {
-            // console.log(c)
-            fileList.push(c[1])
+          switch (os.type()) {
+            case 'Darwin':
+              reg = new RegExp(/inflating: ([a-zA-Z0-9./\\_-]*)/, 'g')
+              while ((c = reg.exec(out))) {
+                fileList.push(c[1])
+              }
+              break
+            case 'Windows_NT':
+              reg = new RegExp(/- ([a-zA-Z0-9./\\_-]*)/, 'g')
+              while ((c = reg.exec(out))) {
+                fileList.push(path.join(targetFileDir, c[1]))
+              }
+              break
           }
         })
         process.on('close', (code) => {
