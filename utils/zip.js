@@ -58,7 +58,7 @@ let obj = {
 
     switch (os.type()) {
       case 'Darwin':
-        cmdStr = `unzip -o${param.pwd ? 'P' + param.pwd : ''} -d ${param.targetFilePath} ${param.zipFilePath} -y`
+        cmdStr = `unzip -o${param.pwd ? 'P' + param.pwd : ''} -d ${param.targetFilePath} ${param.zipFilePath}`
         break
       case 'Windows_NT':
         cmdStr = `${exePath} x -bb1 -r ${param.pwd ? '-p' + param.pwd : ''} ${param.zipFilePath} -o${param.targetFilePath} -y`
