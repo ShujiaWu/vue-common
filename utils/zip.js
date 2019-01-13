@@ -3,7 +3,7 @@ const exec = require('child_process').exec
 const path = require('path')
 const os = require('os')
 
-let exePath = path.join(process.cwd(), '3rd/7z1806/7za.exe')
+let exePath = path.join(process.cwd(), 'resources/3rd/7z1806/7za.exe')
 
 let obj = {
   zip (param) {
