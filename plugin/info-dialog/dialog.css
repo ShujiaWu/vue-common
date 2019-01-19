@@ -5,7 +5,8 @@
   right: 0;
   bottom: 0;
   background: rgba(0,0,0,0.3);
-  text-align: center
+  text-align: center;
+  z-index: 99;
 }
 .info-dialog:after {
   content: '';
