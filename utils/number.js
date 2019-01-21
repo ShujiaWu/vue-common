@@ -1,7 +1,7 @@
-export default (value, decimals, isRound = true) => {
+export default (value, decimals = 2, isRound = true, defaultValue) => {
   if (isNaN(value)) {
     // console.error('【数字格式化】传入非数字')
-    return value
+    return value || defaultValue
   }
   let isDecimal = parseFloat(value) < 0
   value = Math.abs(value)
