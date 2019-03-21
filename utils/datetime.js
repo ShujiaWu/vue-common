@@ -39,6 +39,8 @@ export function format (value, formater) {
     seconds = seconds < 10 ? '0' + seconds : seconds
     let mSeconds = dateTime.getMilliseconds()
     mSeconds = mSeconds < 100 ? '0' + mSeconds : (mSeconds < 10) ? '00' + mSeconds : mSeconds
+    let num = ['日', '一', '二', '三', '四', '五', '六']
+    let mWeek = num[dateTime.getDay()]
     if (formater) {
       return formater.replace('yyyy', fullYear)
         .replace('MM', month)
@@ -47,6 +49,7 @@ export function format (value, formater) {
         .replace('mm', minutes)
         .replace('ss', seconds)
         .replace('S', mSeconds)
+        .replace('W', mWeek)
     } else {
       return value
     }
