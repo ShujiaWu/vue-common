@@ -1,3 +1,5 @@
+@import './color.less';
+
 /*距离位置*/
 /*内边距*/
 .generate-padding(100);
@@ -47,13 +49,11 @@
 
 /* 文字颜色 */
 .text {
-  &-primary {color:#3399ff;}
-  &-primary {color:#5cadff;}
-  &-primary {color:#3091f2;}
-  &-info {color:#3399ff;}
-  &-success {color:#00cc66;}
-  &-warning {color:#ff9900;}
-  &-error {color:#ff3300;}
+  &-primary {color: @primary-color;}
+  &-info {color: @info-color;}
+  &-success {color: @success-color;}
+  &-warning {color:@warning-color;}
+  &-error {color:@error-color;}
   &-title {color:#464c5b;}
   &-content {color:#657180;}
   &-sub-content {color:#9ea7b4;}
