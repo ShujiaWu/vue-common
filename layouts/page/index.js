@@ -1,8 +1,8 @@
 /**
  * 页面布局
- * 
+ *
  * 用法：
- * 
+ *
  * import PageLayout from '@vue-common/layouts/page'
  * Vue.use(PageLayout)
  */

@@ -1,18 +1,31 @@
 <template>
   <div class="page">
-    <slot></slot>
+    <div class="page-container" :style="{background: background}">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PageLayout'
+  name: 'PageLayout',
+  mounted () {
+    this.$store.dispatch('WindowResize')
+  },
+  props: {
+    background: {
+      type: String,
+      default: '#FFF'
+    }
+  }
 }
 </script>
 
 <style lang="less" scoped>
 .page {
-  padding: 20px;
-  background: #FFF;
+  padding: 10px;
+  .page-container {
+    padding: 20px;
+  }
 }
 </style>
