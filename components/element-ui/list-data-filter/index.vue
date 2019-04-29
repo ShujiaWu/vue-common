@@ -26,7 +26,8 @@
     <template v-for="(button,key) in data.buttons">
       <el-button :type="button.type"
                  :key="key"
-                 @click="button.method">
+                 @click="button.method"
+                  class="filter-item">
         <icon :icon="button.icon"
               v-if="button.icon" />
         {{ button.label }}
@@ -54,6 +55,10 @@ export default {
 .filter-item {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.el-button+.el-button {
+    margin-left: 5px;
 }
 </style>

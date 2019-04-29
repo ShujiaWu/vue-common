@@ -1,7 +1,8 @@
 import PaginationMixin from '../pagination'
 import ListDataFilterMixin from '../list-data-filter'
+import CachedPage from '../cached-page'
 export default {
-  mixins: [PaginationMixin, ListDataFilterMixin],
+  mixins: [CachedPage, PaginationMixin, ListDataFilterMixin],
   created () {
     this.init()
   },
@@ -12,13 +13,15 @@ export default {
         loading: false,
         data: []
       },
-      sort: {},
-      params: {}
+      sort: {}
     }
   },
   methods: {
     init () {
       this.getList()
+    },
+    refresh () {
+      this.getList(this.pagination.current)
     },
     /**
      * 获取列表
@@ -31,16 +34,17 @@ export default {
       this.Service.getList({
         page: {
           page: page,
-          size: this.page.size
+          size: this.pagination.size
         },
         filter: this.filter, // 过滤器
         sort: this.sort, // 排序
-        params: {} // 附加参数
+        params: this.page.params, // 附加参数
+        query: this.page.query // 附加参数
       }).then(result => {
         this.table.loading = false
         if (result.isSuccess) {
           this.table.data.splice(0, this.table.data.length, ...result.data.list)
-          Object.assign(this.page, result.data.page)
+          Object.assign(this.pagination, result.data.page)
           if (showMsg) {
             this.$message.success(msg)
           }
@@ -48,6 +52,25 @@ export default {
           this.$message.error(`获取数据失败,${result.message}`)
         }
       })
+    },
+    /**
+     * ===========================================================
+     * 添加、修改成功后刷新列表
+     * ===========================================================
+     */
+    success (type) {
+      switch (type) {
+        case 'add':
+        case 'renew':
+          this.getList(1)
+          break
+        case 'edit':
+        case 'reload':
+          this.getList(this.pagination.current)
+          break
+        default:
+          this.getList(1)
+      }
     }
   }
 }

@@ -1,4 +1,9 @@
+
+import ListDataFilter from '@vue-common/components/element-ui/list-data-filter'
 export default {
+  components: {
+    'list-data-filter': ListDataFilter
+  },
   data () {
     return {
       filter: {}
@@ -22,6 +27,16 @@ export default {
     resetSearch () {
       this.$set(this, 'filter', {})
       this.getList(1)
+    },
+    /**
+     * 重新加载数据的方法
+     */
+    reloadData () {
+      (this.filter &&
+        this.filter.buttons &&
+        this.filter.buttons.resetSearch &&
+        this.filter.buttons.resetSearch.method &&
+        this.filter.buttons.resetSearch.method()) || this.getList()
     }
   }
 }
