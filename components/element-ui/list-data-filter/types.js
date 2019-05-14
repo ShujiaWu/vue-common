@@ -21,10 +21,21 @@ export function Options (obj) {
   return result
 }
 
-export function Button (obj) {
+// export function Button (obj) {
+//   return Object.assign({
+//     type: 'button',
+//     style: {},
+//     placeholder: ''
+//   }, obj)
+// }
+
+export function DateTime (obj) {
   return Object.assign({
-    type: 'button',
-    style: {},
-    placeholder: ''
+    type: 'datetime',
+    value: undefined,
+    style: { width: '260px' },
+    placeholder: '',
+    showType: 'date',
+    format: undefined
   }, obj)
 }

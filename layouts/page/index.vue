@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <slot name="header"></slot>
     <div class="page-container" :style="{background: background}">
       <slot></slot>
     </div>
@@ -23,8 +24,9 @@ export default {
 
 <style lang="less" scoped>
 .page {
-  padding: 10px;
+  // padding: 10px;
   .page-container {
+    margin: 10px;
     padding: 20px;
   }
 }

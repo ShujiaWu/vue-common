@@ -7,27 +7,40 @@
                 :placeholder="field.placeholder"
                 :style="field.style"
                 class="filter-item"
+                :size="size"
                 :key="key" />
       <!-- 选择框 -->
       <el-select v-if="field.type === 'options'"
-                v-model="field.value"
+                 v-model="field.value"
                  :placeholder="field.placeholder"
                  clearable
                  :style="field.style"
                  class="filter-item"
-                 :key="key">
+                 :key="key"
+                 :size="size">
         <el-option v-for="item in field.options"
                    :key="item.value"
                    :label="item.label"
                    :value="item.value" />
       </el-select>
+      <!-- 日期选择 -->
+      <el-date-picker v-if="field.type === 'datetime'"
+                      :key="key"
+                      v-model="field.value"
+                      :placeholder="field.placeholder"
+                      :format="field.format"
+                      :style="field.style"
+                      class="filter-item"
+                      :type="field.showType"
+                      :size="size" />
     </template>
     <slot name="field-append"></slot>
     <template v-for="(button,key) in data.buttons">
       <el-button :type="button.type"
                  :key="key"
                  @click="button.method"
-                  class="filter-item">
+                 class="filter-item"
+                 :size="size">
         <icon :icon="button.icon"
               v-if="button.icon" />
         {{ button.label }}
@@ -43,6 +56,10 @@ export default {
     data: {
       type: Object,
       required: true
+    },
+    size: {
+      type: String,
+      default: undefined
     }
   }
 }
@@ -50,15 +67,14 @@ export default {
 
 <style lang="scss" scoped>
 .filter-area {
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
 .filter-item {
-  display: inline-block;
   vertical-align: middle;
   margin-bottom: 10px;
 }
 
-.el-button+.el-button {
-    margin-left: 5px;
+.el-button + .el-button {
+  margin-left: 5px;
 }
 </style>
