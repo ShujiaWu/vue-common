@@ -26,7 +26,7 @@ export default {
       this.getList()
     },
     refresh () {
-      this.getList(this.pagination.current)
+      this.getList(this.pagination.current, true, '刷新成功')
     },
     /**
      * 获取列表
