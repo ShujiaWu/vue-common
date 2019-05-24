@@ -4,6 +4,7 @@
     <div class="page-container" :style="{background: background}">
       <slot></slot>
     </div>
+    <slot name="footer"></slot>
   </div>
 </template>
 
