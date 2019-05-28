@@ -13,6 +13,7 @@ export default {
         data: []
       },
       sort: {},
+      KeyMap: {}, // 映射关系
       page: {
         name: this.$route.name, // 页面名称
         hash: undefined, // 页面Hash值
@@ -48,8 +49,18 @@ export default {
       }).then(result => {
         this.table.loading = false
         if (result.isSuccess) {
+          // 数据
           this.table.data.splice(0, this.table.data.length, ...result.data.list)
+          // 分页
           Object.assign(this.pagination, result.data.page)
+          // 映射关系
+          if (result.data.KeyMap && result.data.KeyMap instanceof Object) {
+            for (const key in result.data.KeyMap) {
+              if (result.data.KeyMap.hasOwnProperty(key)) {
+                this.KeyMap[key] = result.data.KeyMap[key]
+              }
+            }
+          }
           if (showMsg) {
             this.$message.success(msg)
           }
