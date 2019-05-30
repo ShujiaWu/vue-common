@@ -21,6 +21,20 @@ export function Options (obj) {
   return result
 }
 
+export function Cascader (obj) {
+  let result = Object.assign({
+    type: 'cascader',
+    style: { width: '200px' },
+    value: undefined,
+    placeholder: '',
+    options: []
+  }, obj)
+  if (obj.options) {
+    result.options = obj.options
+  }
+  return result
+}
+
 // export function Button (obj) {
 //   return Object.assign({
 //     type: 'button',

@@ -11,7 +11,7 @@
                 :key="key" />
       <!-- 选择框 -->
       <el-select v-if="field.type === 'options'"
-                 v-model="field.value"
+                 v-model="field.options"
                  :placeholder="field.placeholder"
                  clearable
                  :style="field.style"
@@ -23,6 +23,15 @@
                    :label="item.label"
                    :value="item.value" />
       </el-select>
+      <!-- 级联 -->
+      <el-cascader :placeholder="field.placeholder"
+                   v-if="field.type === 'cascader'"
+                   :options="field.options"
+                   v-model="field.value"
+                   class="filter-item"
+                   filterable
+                   :key="key"
+                   :size="size" />
       <!-- 日期选择 -->
       <el-date-picker v-if="field.type === 'datetime'"
                       :key="key"

@@ -1,7 +1,7 @@
 /**
  * 通用对象
  */
-import _ from 'lodash'
+// import _ from 'lodash'
 export default {
   /**
    * 搜索按钮点击，数据处理
