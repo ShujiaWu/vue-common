@@ -11,7 +11,7 @@
                 :key="key" />
       <!-- 选择框 -->
       <el-select v-if="field.type === 'options'"
-                 v-model="field.options"
+                 v-model="field.value"
                  :placeholder="field.placeholder"
                  clearable
                  :style="field.style"
