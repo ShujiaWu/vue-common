@@ -15,7 +15,8 @@ export default {
     this.page.hash = hash = md5(hash)
     // 读取上一次加载页面的hash
     // let data = this.$SessionStorage.get(this.page.name)
-    let data = this.$store.state.app.cachedPage[this.page.name]
+    let data = this.$store.state.app.pageHash[this.page.name]
+    console.log('页面hash比对', this.page.name, data, this.page.hash)
     // 哈希比对，不一致，则需要刷新本页面
     if (data !== this.page.hash) {
       if (data) {
@@ -26,6 +27,8 @@ export default {
         this.$set(this.page, 'query', Object.assign({}, this.$route.query))
         // 重新加载数据
         this.reloadData()
+      } else {
+        console.log('页面首次进入')
       }
     } else {
       console.log('页面Hash一致，无需要刷新')
