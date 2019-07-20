@@ -1,0 +1,62 @@
+@import './variables/color.scss';
+
+/* 文字位置 */
+.text {
+  &-left {text-align: left !important;}
+  &-right {text-align: right !important;}
+  &-center {text-align: center !important;}
+}
+
+.text {
+  &-12 {font-size: 12px !important;}
+  &-13 {font-size: 13px !important;}
+  &-14 {font-size: 14px !important;}
+  &-15 {font-size: 15px !important;}
+  &-16 {font-size: 16px !important;}
+  &-17 {font-size: 17px !important;}
+  &-18 {font-size: 18px !important;}
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+/* 文字颜色 */
+.text {
+  &-primary {color: $color-primary;}
+  &-info {color: $color-info;}
+  &-success {color: $color-success;}
+  &-warning {color:$color-warning;}
+  &-error {color:$color-error;}
+  &-title {color:#464c5b;}
+  &-content {color:#657180;}
+  &-sub-content {color:#9ea7b4;}
+  &-disabled {color:#c3cbd6;}
+  &-333 {color:#333;}
+  &-666 {color:#666;}
+  &-999 {color:#999;}
+
+  &-info-light-1 {color: $color-info-light-1;}
+  &-info-light-2 {color: $color-info-light-2;}
+  &-info-light-3 {color: $color-info-light-3;}
+  &-info-light-4 {color: $color-info-light-4;}
+  &-info-light-5 {color: $color-info-light-5;}
+}
+
+// 一行显示文本
+.text-one-line {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 两行显示文本
+.text-two-line  {
+  text-overflow: unset;
+  white-space: unset;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

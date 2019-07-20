@@ -1,0 +1,46 @@
+
+.border {
+  border: 1px solid $color-border;
+  &-dotted {
+    border: 1px dotted $color-border;
+  }
+  &-dashed {
+    border: 1px dashed $color-border;
+  }
+  &-top {
+    border-top: 1px solid $color-border;
+    &-dotted {
+      border-top: 1px dotted $color-border;
+    }
+    &-dashed {
+      border-top: 1px dashed $color-border;
+    }
+  }
+  &-right {
+    border-right: 1px solid $color-border;
+    &-dotted {
+      border-right: 1px dotted $color-border;
+    }
+    &-dashed {
+      border-right: 1px dashed $color-border;
+    }
+  }
+  &-bottom {
+    border-bottom: 1px solid $color-border;
+    &-dotted {
+      border-bottom: 1px dotted $color-border;
+    }
+    &-dashed {
+      border-bottom: 1px dashed $color-border;
+    }
+  }
+  &-left {
+    border-left: 1px solid $color-border;
+    &-dotted {
+      border-left: 1px dotted $color-border;
+    }
+    &-dashed {
+      border-left: 1px dashed $color-border;
+    }
+  }
+}

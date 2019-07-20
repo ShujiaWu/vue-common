@@ -1,0 +1,84 @@
+/*基础颜色*/
+$color-text-main        : #303133;
+$color-primary          : #409EFF;
+$color-info             : #909399;
+$color-success          : #67C23A;
+$color-warning          : #E6A23C;
+$color-error            : #F56C6C;
+$color-danger           : #F56C6C;
+$color-white            : #FFF;
+
+$color-primary-light-1: mix($color-white, $color-primary, 10%);
+$color-primary-light-2: mix($color-white, $color-primary, 20%);
+$color-primary-light-3: mix($color-white, $color-primary, 30%);
+$color-primary-light-4: mix($color-white, $color-primary, 40%);
+$color-primary-light-5: mix($color-white, $color-primary, 50%);
+$color-primary-light-6: mix($color-white, $color-primary, 60%);
+$color-primary-light-7: mix($color-white, $color-primary, 70%);
+$color-primary-light-8: mix($color-white, $color-primary, 80%);
+$color-primary-light-9: mix($color-white, $color-primary, 90%);
+
+$color-success-light    : mix($color-white, $color-success, 80%);
+$color-warning-light    : mix($color-white, $color-warning, 80%);
+$color-error-light      : mix($color-white, $color-error, 80%);
+$color-danger-light     : mix($color-white, $color-danger, 80%);
+
+$color-info-light-1       : mix($color-white, $color-info, 10%);
+$color-info-light-2       : mix($color-white, $color-info, 20%);
+$color-info-light-3       : mix($color-white, $color-info, 30%);
+$color-info-light-4       : mix($color-white, $color-info, 40%);
+$color-info-light-5       : mix($color-white, $color-info, 50%);
+
+$color-success-lighter  : mix($color-white, $color-success, 90%);
+$color-warning-lighter  : mix($color-white, $color-warning, 90%);
+$color-error-lighter    : mix($color-white, $color-error, 90%);
+$color-danger-lighter   : mix($color-white, $color-danger, 90%);
+
+$color-border                 :#DCDFE6;
+$color-border-light-1         :mix($color-white, $color-success, 10%);
+$color-border-light-2         :mix($color-white, $color-success, 20%);
+$color-border-light-3         :mix($color-white, $color-success, 30%);
+
+:export {
+  // 基础颜色
+  Primary: $color-primary;
+  Info: $color-info;
+  Success: $color-success;
+  Warning: $color-warning;
+  Error: $color-error;
+  Danger: $color-danger;
+
+  PrimaryLight1: $color-primary-light-1;
+  PrimaryLight2: $color-primary-light-2;
+  PrimaryLight3: $color-primary-light-3;
+  PrimaryLight4: $color-primary-light-4;
+  PrimaryLight5: $color-primary-light-5;
+  PrimaryLight6: $color-primary-light-6;
+  PrimaryLight7: $color-primary-light-7;
+  PrimaryLight8: $color-primary-light-8;
+  PrimaryLight9: $color-primary-light-9;
+
+  SuccessLight: $color-success-light;
+  WarningLight: $color-warning-light;
+  ErrorLight: $color-error-light;
+  DangerLight: $color-danger-light;
+  InfoLight: $color-info-light-1;
+
+  SuccessLighter: $color-success-lighter;
+  WarningLighter: $color-warning-lighter;
+  ErrorLighter: $color-error-lighter;
+  DangerLighter: $color-danger-lighter;
+  InfoLighter: $color-info-light-3;
+
+  InfoLight1: $color-info-light-1;
+  InfoLight2: $color-info-light-2;
+  InfoLight3: $color-info-light-3;
+  InfoLight4: $color-info-light-4;
+  InfoLight5: $color-info-light-5;
+
+
+  Border: $color-border;
+  BorderLight1: $color-border-light-1;
+  BorderLight2: $color-border-light-2;
+  BorderLight3: $color-border-light-3;
+}
