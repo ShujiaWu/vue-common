@@ -30,8 +30,12 @@ export default {
       } else {
         console.log('页面首次进入')
       }
+      // 滚动条回顶部
+      document.documentElement.scrollTop = 0
     } else {
       console.log('页面Hash一致，无需要刷新')
+      // 滚动条回到上一次的位置
+      document.documentElement.scrollTop = this.$store.state.app.pageScrollTop[this.$route.name]
     }
     // 删除上一次记录的hash
     // this.$SessionStorage.delete(this.page.name)
