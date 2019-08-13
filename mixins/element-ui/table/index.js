@@ -52,7 +52,7 @@ export default {
           // 数据
           this.table.data.splice(0, this.table.data.length, ...result.data.list)
           // 分页
-          Object.assign(this.pagination, result.data.page)
+          Object.assign(this.pagination, result.data.pagination)
           // 映射关系
           if (result.data.KeyMap && result.data.KeyMap instanceof Object) {
             for (const key in result.data.KeyMap) {

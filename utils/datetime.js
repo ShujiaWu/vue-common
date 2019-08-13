@@ -11,19 +11,18 @@ export function isValid (value) {
   if (value === undefined || value === '' || value === null) {
     return false
   }
-  if (typeof value === 'string') {
-    value = value.replace(/-/g, '/')
-  }
   if (new Date(value).toString() === 'Invalid Date') {
-    return false
+    if (typeof value === 'string') {
+      value = value.replace(/-/g, '/')
+    }
+    if (new Date(value).toString() === 'Invalid Date') {
+      return false
+    }
   }
   return true
 }
 
 export function format (value, formater) {
-  if (typeof value === 'string') {
-    value = value.replace(/-/g, '/')
-  }
   if (isValid(value)) {
     let dateTime = new Date(value)
     let fullYear = dateTime.getFullYear()
