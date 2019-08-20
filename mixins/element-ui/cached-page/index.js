@@ -35,14 +35,14 @@ export default {
     }
     // 删除上一次记录的hash
     // this.$SessionStorage.delete(this.page.name)
-    this.$store.dispatch('AppEnterCachePage', {
+    this.$store.dispatch('app/AppEnterCachePage', {
       page: this.page.name
     })
   },
   deactivated () {
     // 保存页面的 hash
     // this.$SessionStorage.set(this.page.name, this.page.hash)
-    this.$store.dispatch('AppLeaveCachePage', {
+    this.$store.dispatch('app/AppLeaveCachePage', {
       page: this.page.name,
       value: this.page.hash
     })

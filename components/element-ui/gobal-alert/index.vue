@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     close () {
-      this.$store.dispatch('AppGobalAlertClose')
+      this.$store.dispatch('app/AppGobalAlertClose')
     }
   }
 }

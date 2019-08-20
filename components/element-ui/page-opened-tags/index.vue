@@ -122,10 +122,10 @@ export default {
         }
         if (!isExist) {
           // 目标页面没有被打开过
-          this.$store.dispatch('AppOpenNewPage', target)
+          this.$store.dispatch('app/AppOpenNewPage', target)
         } else {
           // 目标页面之前被打开，则更新参数
-          this.$store.dispatch('UpdateOpenNewPage', { pos, target })
+          this.$store.dispatch('app/UpdateOpenNewPage', { pos, target })
         }
         if (pos === -1) {
           pos = this.$store.state.app.openedPageTags.length - 1
@@ -255,20 +255,20 @@ export default {
     },
     // 关闭指定标签
     close (page, index) {
-      this.$store.dispatch('AppClosePage', { page, index })
+      this.$store.dispatch('app/AppClosePage', { page, index })
     },
     // 关闭其他标签
     closeOther (item, index) {
       this.linkTo(item)
       this.$nextTick(() => {
-        this.$store.dispatch('AppCloseOtherPage', this.currentPos)
+        this.$store.dispatch('app/AppCloseOtherPage', this.currentPos)
         this.currentPos = 0
         this.movetoView(this.$refs.tags[this.currentPos].$el)
       })
     },
     // 关闭全部标签
     closeAll () {
-      this.$store.dispatch('AppCloseAllPage')
+      this.$store.dispatch('app/AppCloseAllPage')
       this.$router.push('/')
     },
     openMenu (item, index, e) {
@@ -287,7 +287,7 @@ export default {
     },
     refresh (page, index) {
       console.log(index)
-      this.$store.dispatch('AppRefreshPage', { page, index }).then(() => {
+      this.$store.dispatch('app/AppRefreshPage', { page, index }).then(() => {
         this.$nextTick(() => {
           this.$router.replace({
             path: '/redirect' + page.fullPath

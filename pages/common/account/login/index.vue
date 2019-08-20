@@ -77,7 +77,7 @@ export default {
           this.login(this.form.data).then(result => {
             this.form.loading = false
             if (result.isSuccess) {
-              this.$store.dispatch('UserLogin', result.data).then(() => {
+              this.$store.dispatch('user/UserLogin', result.data).then(() => {
                 this.$router.replace({
                   path: this.redirect || '/',
                   query: this.otherQuery
