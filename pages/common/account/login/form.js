@@ -2,8 +2,8 @@ import { RegExpPhone, RegExpPwd } from '@vue-common/utils/validator'
 export default {
   loading: false,
   data: {
-    account: '13900000000',
-    pwd: 'Aa123456'
+    account: '',
+    pwd: ''
   },
   placeholder: {
     account: '请输入登录账号',
