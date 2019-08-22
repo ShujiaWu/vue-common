@@ -1,5 +1,5 @@
 <template>
-  <div class="gobal-alert">
+  <div class="global-alert">
     <el-alert v-bind="attr" @close="close">
       <div slot="title" v-html="title" v-if="title"></div>
       <div v-if="content">{{content}}</div>
@@ -12,20 +12,20 @@ export default {
   computed: {
     attr () {
       let attr = {
-        type: this.$store.state.app.gobalAlert.type,
-        closable: this.$store.state.app.gobalAlert.closable,
-        showIcon: this.$store.state.app.gobalAlert.showIcon
+        type: this.$store.state.app.globalAlert.type,
+        closable: this.$store.state.app.globalAlert.closable,
+        showIcon: this.$store.state.app.globalAlert.showIcon
       }
-      if (this.$store.state.app.gobalAlert.closeText) {
-        attr.closeText = this.$store.state.app.gobalAlert.closeText
+      if (this.$store.state.app.globalAlert.closeText) {
+        attr.closeText = this.$store.state.app.globalAlert.closeText
       }
       return attr
     },
     title () {
-      return this.$store.state.app.gobalAlert.title
+      return this.$store.state.app.globalAlert.title
     },
     content () {
-      return this.$store.state.app.gobalAlert.content
+      return this.$store.state.app.globalAlert.content
     }
   },
   data () {
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     close () {
-      this.$store.dispatch('app/AppGobalAlertClose')
+      this.$store.dispatch('app/AppGlobalAlertClose')
     }
   }
 }
@@ -41,14 +41,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../../../vue-common/assets/styles/element-ui/variables/variables.scss';
-.gobal-alert {
+.global-alert {
   background: $pageBgColor;
-  padding: 5px 10px;
+  padding: 10px 10px 0 10px;
 }
 </style>
 
 <style lang="scss">
-.gobal-alert {
+.global-alert {
   .el-alert__content {
     width: 90%;
   }

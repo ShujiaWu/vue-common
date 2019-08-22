@@ -2,7 +2,7 @@
   <div class="login-page">
     <div class="login-container">
       <div class="avatar">
-        <svg-icon icon="user" size="80px" />
+        <svg-icon icon="user" size="80px" style="vertical-align:middle"/>
       </div>
       <div class="title">User Login</div>
       <!-- 表单 -->
