@@ -2,7 +2,7 @@
   <div class="login-page">
     <div class="login-container">
       <div class="avatar">
-        <svg-icon icon="user" />
+        <svg-icon icon="user" size="80px" />
       </div>
       <div class="title">User Login</div>
       <!-- 表单 -->
@@ -133,7 +133,12 @@ export default {
       border-radius: 50%;
       line-height: 100px;
       color: #FFF;
-      font-size: 80px;
+      &::after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
     }
     .title {
       padding: 30px 0;

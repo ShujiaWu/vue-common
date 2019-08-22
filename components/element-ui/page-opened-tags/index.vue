@@ -13,18 +13,6 @@
            :style="{left: left + 'px'}"
            ref="scrollBody">
         <transition-group name="taglist-moving-animation">
-          <!-- eslint-diabled -->
-          <!-- <el-tag
-            :closable="!isActive(item)"
-            :type="`${isActive(item)?'primary':'info'}`"
-            size="mini"
-            checkable
-            v-for="(item,index) in $store.state.app.openedPageTags"
-            :key="index + 0"
-            ref="tags"
-            @click.native="linkTo(item)"
-            @on-close="close(index)"
-          >{{item.title}}</el-tag> -->
           <router-link v-for="(item,index) in $store.state.app.openedPageTags"
                        ref="tags"
                        :key="index + 0"
@@ -375,6 +363,7 @@ export default {
   font-size: 12px;
   margin-left: 5px;
   margin-top: 4px;
+  user-select:none;
   &.active {
     background-color: #42b983;
     color: #fff;
