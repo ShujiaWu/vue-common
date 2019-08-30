@@ -13,7 +13,7 @@ export default {
       if (obj.hasOwnProperty(key)) {
         switch (obj[key].type) {
           default:
-            filter[key] = obj[key].value ? obj[key].value : undefined
+            filter[key] = (obj[key].value || obj[key].value === 0) ? obj[key].value : undefined
         }
       }
     }
