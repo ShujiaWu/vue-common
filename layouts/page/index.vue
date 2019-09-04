@@ -1,7 +1,9 @@
 <template>
-  <div class="page">
+  <div class="page"
+       :class="{'full-page': fullPage}">
     <slot name="header"></slot>
-    <div class="page-container" :class="{'full-page': fullPage}" :style="{background: background}">
+    <div class="page-container"
+         :style="{background: background}">
       <slot></slot>
     </div>
     <slot name="footer"></slot>
@@ -19,7 +21,7 @@ export default {
       type: String,
       default: '#FFF'
     },
-    'fullPage': {
+    fullPage: {
       type: Boolean,
       default: false
     }
@@ -33,7 +35,11 @@ export default {
   .page-container {
     margin: 10px;
     padding: 20px;
-    &.full-page {
+  }
+  &.full-page {
+    height: 100%;
+    overflow: auto;
+    .page-container {
       height: calc(100% - 20px);
     }
   }
