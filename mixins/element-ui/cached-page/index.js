@@ -10,13 +10,13 @@ export default {
   activated () {
     this.beforeReactived()
     // 根据路由的名字和参数计算页面的额hash
-    let hash = `${this.$route.name}-${JSON.stringify(this.$route.params)}-${JSON.stringify(this.$route.query)}`
+    let hash = `${this.$route.name}/${this.$options.name}-${JSON.stringify(this.$route.params)}-${JSON.stringify(this.$route.query)}`
     console.log(hash)
     this.page.hash = hash = md5(hash)
     // 读取上一次加载页面的hash
     // let data = this.$SessionStorage.get(this.page.name)
-    let data = this.$store.state.app.pageHash[this.page.name]
-    console.log('页面hash比对', this.page.name, data, this.page.hash)
+    const data = this.$store.state.app.pageHash[`${this.page.name}/${this.$options.name}`]
+    console.log('页面hash比对', `${this.page.name}/${this.$options.name}`, data, this.page.hash)
     // 哈希比对，不一致，则需要刷新本页面
     if (data !== this.page.hash) {
       if (data) {
@@ -36,14 +36,14 @@ export default {
     // 删除上一次记录的hash
     // this.$SessionStorage.delete(this.page.name)
     this.$store.dispatch('app/AppEnterCachePage', {
-      page: this.page.name
+      page: `${this.page.name}/${this.$options.name}`
     })
   },
   deactivated () {
     // 保存页面的 hash
     // this.$SessionStorage.set(this.page.name, this.page.hash)
     this.$store.dispatch('app/AppLeaveCachePage', {
-      page: this.page.name,
+      page: `${this.page.name}/${this.$options.name}`,
       value: this.page.hash
     })
   },
