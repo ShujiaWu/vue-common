@@ -2,20 +2,19 @@
  * 通用对象
  */
 import _ from 'lodash'
-import Types from './types'
 export default {
   /**
    * 搜索按钮点击，数据处理
    * @param {Object} obj 未经处理的数据对象（组件数据对象）
    */
   search (obj) {
-    let filter = {}
+    const filter = {}
     for (var key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.hasOwnProperty.call(obj, key)) {
         // 如果是 对象、非空字符串、数字
         if (obj[key].text !== undefined) {
           switch (obj[key].type) {
-            case Types.NumberArea:
+            case 'number-area':
               // 区间数据特殊处理
               if (obj[key].text.min !== undefined && _.trim(obj[key].text.min)) {
                 filter[key + 'Min'] = obj[key].value.min = _.trim(obj[key].text.min)
@@ -28,7 +27,7 @@ export default {
                 obj[key].value.max = undefined
               }
               break
-            case Types.DateTimeArea:
+            case 'date-time-area':
               // 区间数据特殊处理
               if (obj[key].text[0] && obj[key].text[1]) {
                 obj[key].value = []
@@ -38,7 +37,7 @@ export default {
                 filter[key + 'End'] = new Date(obj[key].text[1]).getTime()
               }
               break
-            case Types.OptionsMulti:
+            case 'options-multi':
               // 下拉多选
               if (obj[key].text.length) {
                 filter[key] = obj[key].value = []
@@ -70,15 +69,16 @@ export default {
    * @param {Object} obj 未经处理的数据对象（组件数据对象）
    */
   resetSearch (obj) {
+    console.log('重置搜索')
     for (var key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.hasOwnProperty.call(obj, key)) {
         switch (obj[key].type) {
-          case Types.NumberArea:
+          case 'number-area':
             // 数字区间数据特殊处理
             obj[key].text.min = obj[key].value.min = undefined
             obj[key].text.max = obj[key].value.max = undefined
             break
-          case Types.DateTimeArea:
+          case 'date-time-area':
             // 时间区间数据特殊处理
             console.log(obj[key].text.length)
             console.log(obj[key].value.length)
@@ -91,7 +91,7 @@ export default {
             //   obj[key].value.pop()
             // }
             break
-          case Types.OptionsMulti:
+          case 'options-multi':
             // 下拉多选
             obj[key].text = []
             obj[key].value = []

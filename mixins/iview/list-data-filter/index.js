@@ -1,19 +1,14 @@
-import ListDataFilter from '@vue-common/components/list-data-filter'
+import ListDataFilter from '@vue-common/components/iview/list-data-filter'
 export default {
   components: {
     ListDataFilter
   },
-  created () {
-  },
-  beforeMount () {
-  },
-  mounted () {
-  },
   data () {
     return {
-      // 查询
-      filter: undefined,
-      filterData: {}
+      // 过滤器的值
+      filter: {},
+      // 过滤器配置
+      FilterConfig: {}
     }
   },
   methods: {
@@ -23,7 +18,7 @@ export default {
      * ===========================================================
      */
     search (data) {
-      Object.assign(this.filterData, data)
+      Object.assign(this.filter, data)
       this.getList(1, true, '查询成功')
     },
     /**
@@ -32,8 +27,18 @@ export default {
      * ===========================================================
      */
     resetSearch () {
-      this.$set(this, 'filterData', {})
+      this.$set(this, 'filter', {})
       this.getList(1)
+    },
+    /**
+     * 重新加载数据的方法
+     */
+    reloadData () {
+      (this.filter &&
+        this.filter.buttons &&
+        this.filter.buttons.resetSearch &&
+        this.filter.buttons.resetSearch.method &&
+        this.filter.buttons.resetSearch.method()) || this.getList()
     }
   }
 }

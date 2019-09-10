@@ -8,7 +8,7 @@ export default {
    * @param {Object} obj 未经处理的数据对象（组件数据对象）
    */
   search (obj) {
-    let filter = {}
+    const filter = {}
     for (var key in obj) {
       if (obj.hasOwnProperty(key)) {
         switch (obj[key].type) {

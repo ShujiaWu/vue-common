@@ -14,14 +14,14 @@ export default {
     this.getList()
   },
   mounted () {
-    let hash = `${this.$route.name}-${JSON.stringify(this.$route.params)}-${JSON.stringify(this.$route.query)}`
+    const hash = `${this.$route.name}-${JSON.stringify(this.$route.params)}-${JSON.stringify(this.$route.query)}`
     this.pageHash = md5(hash)
   },
   activated () {
     this.reactived()
     let hash = `${this.$route.name}-${JSON.stringify(this.$route.params)}-${JSON.stringify(this.$route.query)}`
     this.pageHash = hash = md5(hash)
-    let data = this.$SessionStorage.get(this.pageName)
+    const data = this.$SessionStorage.get(this.pageName)
     if (data !== this.pageHash) {
       (this.filter &&
         this.filter.buttons &&
@@ -153,7 +153,7 @@ export default {
         if (pageSize * (this.page.current - 1) > this.page.total) {
           // 当前页的前一页的数据量 > 总数据量
           // 计算最后一页
-          let targetPage = parseInt(this.page.total / pageSize) + 1
+          const targetPage = parseInt(this.page.total / pageSize) + 1
           this.page.size = pageSize
           this.getList(targetPage)
         } else {
@@ -198,19 +198,19 @@ export default {
      * 添加
      * ===========================================================
      */
-    add () {},
+    add () { },
     /**
      * ===========================================================
      * 修改
      * ===========================================================
      */
-    modify () {},
+    modify () { },
     /**
      * ===========================================================
      * 删除
      * ===========================================================
      */
-    delete () {},
+    delete () { },
     /**
      * ===========================================================
      * 添加、修改成功后刷新列表
