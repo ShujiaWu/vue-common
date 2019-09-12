@@ -14,7 +14,7 @@
 export default {
   name: 'PageLayout',
   mounted () {
-    this.$store.dispatch('window/WindowResize')
+    this.$store.dispatch('window/Resize')
   },
   props: {
     background: {
