@@ -7,7 +7,6 @@ export default {
   },
   data () {
     return {
-      Service: null,
       table: {
         loading: false,
         data: []
