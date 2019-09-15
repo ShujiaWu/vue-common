@@ -9,7 +9,12 @@
               size="32"></Icon>
       </div>
     </div>
-    <div class="menu">
+    <!-- 面包屑 -->
+    <Breadcrumb class="breadcrumb">
+      <Breadcrumb-item v-for="(item,index) in $store.state.app.breadcurmb"
+                       :key="index">{{item.title}}</Breadcrumb-item>
+    </Breadcrumb>
+    <!-- <div class="menu">
       <Menu mode="horizontal"
             :active-name="activeName">
         <MenuItem :name="item.id"
@@ -20,6 +25,45 @@
         {{item.title}}
         </MenuItem>
       </Menu>
+    </div> -->
+    <!-- 系统切换 -->
+    <div class="margin-r-40">
+      <div>
+        <Dropdown trigger="click">
+          <a href="javascript:void(0)"
+             class="text-normal">{{$route.meta &&$route.meta.level && $route.meta.level.length ?$route.meta.level[0].title : '切换系统'}}
+            <Icon type="md-arrow-dropdown" />
+          </a>
+          <DropdownMenu slot="list">
+            <DropdownItem v-for="(item, index) in menus"
+                          @click.native="menuItemClick(item)"
+                          :key="index">
+              <Icon :type="item.icon" />{{item.title}}
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+    </div>
+    <!-- 用户菜单 -->
+    <div class="margin-r-10">
+      <!-- 全屏 -->
+      <!-- <full-screen v-model="isFullScreen"></full-screen>
+        <lock-screen></lock-screen> -->
+      <!-- 用户菜单 -->
+      <div class="user-menu">
+        <Dropdown trigger="click">
+          <Avatar :src="$store.state.user.avatar"
+                  style="cursor:pointer"></Avatar>
+          <a href="javascript:void(0)"
+             class="text-normal">{{$store.state.user.nickName}}
+            <Icon type="md-arrow-dropdown" />
+          </a>
+          <DropdownMenu slot="list">
+            <DropdownItem>用户中心</DropdownItem>
+            <DropdownItem>退出登录</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
     </div>
   </div>
 </template>
@@ -91,12 +135,15 @@ export default {
       }
     }
   }
-  .menu {
+  // .menu {
+  //   flex: 1;
+  //   padding-top: 4px;
+  //   .ivu-menu-horizontal.ivu-menu-light:after {
+  //     display: none;
+  //   }
+  // }
+  .breadcrumb {
     flex: 1;
-    padding-top: 4px;
-    .ivu-menu-horizontal.ivu-menu-light:after {
-      display: none;
-    }
   }
 }
 </style>
