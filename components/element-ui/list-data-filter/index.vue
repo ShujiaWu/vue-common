@@ -41,7 +41,10 @@
                       :style="field.style"
                       class="filter-item"
                       :type="field.showType"
-                      :size="size" />
+                      :size="size"
+                      :start-placeholder="field.startPlaceholder"
+                      :end-placeholder="field.endPlaceholder"
+                      :range-separator="field.rangeSeparator" />
     </template>
     <slot name="field-append"></slot>
     <template v-for="(button,key) in data.buttons">
@@ -85,5 +88,11 @@ export default {
 
 .el-button + .el-button {
   margin-left: 5px;
+}
+</style>
+
+<style lang="less">
+.el-date-editor .el-range-separator {
+  width: auto;
 }
 </style>
