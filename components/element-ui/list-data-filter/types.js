@@ -53,3 +53,16 @@ export function DateTime (obj) {
     format: undefined
   }, obj)
 }
+
+export function NumberRange (obj) {
+  return Object.assign({
+    type: 'number-range',
+    value: undefined,
+    style: { width: '200px' },
+    palaceholderMin: '',
+    palaceholderMax: '',
+    rangeSeparator: '-',
+    min: undefined,
+    max: undefined
+  }, obj)
+}

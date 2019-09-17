@@ -45,6 +45,18 @@
                       :start-placeholder="field.startPlaceholder"
                       :end-placeholder="field.endPlaceholder"
                       :range-separator="field.rangeSeparator" />
+      <!-- 数字区间 -->
+      <number-range v-if="field.type === 'number-range'"
+                    v-model="field.value"
+                    :palaceholderMin="field.palaceholderMin"
+                    :palaceholderMax="field.palaceholderMax"
+                    :min="field.min"
+                    :max="field.max"
+                    :size="size"
+                    class="filter-item"
+                    :style="field.style"
+                    :rangeSeparator="field.rangeSeparator"
+                    :key="key" />
     </template>
     <slot name="field-append"></slot>
     <template v-for="(button,key) in data.buttons">
@@ -63,7 +75,11 @@
 </template>
 
 <script>
+import NumberRange from '../number-range'
 export default {
+  components: {
+    NumberRange
+  },
   props: {
     data: {
       type: Object,
